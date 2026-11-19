@@ -1,14 +1,15 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import { signIn, signUp } from './actions'
 
 export default function Login({searchParams}:{searchParams:Promise<{error?:string;message?:string}>}){
  const [mode,setMode]=useState<'signin'|'signup'>('signin')
  const [visible,setVisible]=useState(false)
  const [busy,setBusy]=useState(false)
- const [server,setServer]=useState<{error?:string;message?:string}>({})
- useState(()=>{void searchParams.then(setServer)})
+ const params=use(searchParams)
+ const [dismiss,setDismiss]=useState(false)
+ const server=dismiss?{}:params
  const isSignup=mode==='signup'
  const error=server.error||''
  const limit=/(\d+) seconds?/.exec(error)
@@ -36,8 +37,8 @@ export default function Login({searchParams}:{searchParams:Promise<{error?:strin
      <h2>{isSignup?'Your money journey starts here.':'Welcome back.'}</h2>
      <p className="auth-lead">{isSignup?'Create your personal finance account.':'Your financial world is right where you left it.'}</p>
      <div className="auth-tabs" role="group" aria-label="Account action">
-      <button type="button" className={!isSignup?'selected':''} onClick={()=>{setMode('signin');setServer({});setBusy(false)}}>Sign in</button>
-      <button type="button" className={isSignup?'selected':''} onClick={()=>{setMode('signup');setServer({});setBusy(false)}}>Create account</button>
+      <button type="button" className={!isSignup?'selected':''} onClick={()=>{setMode('signin');setDismiss(true);setBusy(false)}}>Sign in</button>
+      <button type="button" className={isSignup?'selected':''} onClick={()=>{setMode('signup');setDismiss(true);setBusy(false)}}>Create account</button>
      </div>
      {error&&<div className="auth-alert" role="alert"><span aria-hidden="true">!</span><div>{limit?'Too many email requests. Supabase is temporarily limiting signup emails. Avoid submitting repeatedly; check your inbox for the earlier confirmation link.':error}</div></div>}
      {server.message&&<div className="auth-info" role="status">✓ &nbsp;{server.message}</div>}
