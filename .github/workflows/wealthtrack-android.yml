@@ -29,7 +29,7 @@ jobs:
       - name: Unpack Android source
         run: mkdir -p android && base64 -d android/source.tar.xz.b64 | tar -xJ -C android
       - name: Fix Android button compatibility
-        run: sed -i 's/\\.setTextAllCaps(false)/.setAllCaps(false)/g' android/app/src/main/java/in/wealthtrack/companion/MainActivity.java
+        run: sed -i 's/setTextAllCaps(/setAllCaps(/g' android/app/src/main/java/in/wealthtrack/companion/MainActivity.java
       - name: Build debug APK
         working-directory: android
         run: gradle --no-daemon assembleDebug
