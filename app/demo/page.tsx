@@ -1,3 +1,3 @@
-import Demo from './demo-dashboard'
-export const metadata={title:'WealthTrack Demo | Interactive Preview',description:'Explore WealthTrack using fictional sample data; no account required.'}
-export default function DemoPage(){return <Demo/>}
+import SmartDemo from './demo-dashboard'
+export const metadata={title:'WealthTrack — Smart Money Demo',description:'Explore money insights, simulated UPI payment categorization and goals with sample data.'}
+export default function DemoPage(){return <SmartDemo/>}
