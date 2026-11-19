@@ -49,6 +49,7 @@ export default function Login({searchParams}:{searchParams:Promise<{error?:strin
       {isSignup&&<p className="auth-field-note">Use at least 8 characters. You may need to verify your email before your first sign in.</p>}
       <button className="auth-submit" type="submit" disabled={busy}>{busy?'Processing…':isSignup?'Create your account':'Sign in to WealthTrack'} <span aria-hidden="true">→</span></button>
      </form>
+     <div className="demo-login-entry"><div className="demo-divider"><span>OR EXPLORE WITHOUT SIGNING UP</span></div><Link className="demo-login-button" href="/demo">✦ &nbsp; Try interactive demo <span>↗</span></Link><p>No email, password or verification required.</p></div>
      <div className="auth-footnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> Your financial data is private and protected.</div>
      {isSignup&&<p className="auth-signup-hint">Already registered? <button type="button" onClick={()=>setMode('signin')}>Sign in instead</button></p>}
     </div>
